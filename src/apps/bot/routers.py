@@ -19,7 +19,7 @@ async def add_bot(bot: BotAddSchema):
     return {'status': 'Trying to create a bot, check result at /bot_status'}
 
 
-@router.get('bot_status/{api_id}')
+@router.get('/bot_status/{api_id}')
 async def get_status_of_bot(api_id: str):
     await producer_send_one(topic='bot_status_request', value=api_id)
 
@@ -38,3 +38,9 @@ async def get_status_of_bot(api_id: str):
 async def confirm_code_bot(api_id: str, code: str):
     await producer_send_one(topic='bot_code', value=json.dumps({'api_id': api_id, 'code': code}))
     return {'status': 'Trying to confirm code, check result at /bot_status'}
+
+
+@router.post('/{api_id}/{command}')
+async def send_command_to_bot(api_id: str, command: str, arg1: str):
+    await producer_send_one(topic=api_id, value=json.dumps({'command': command, 'arg1': arg1}))
+    return {'status': 'Command sent to bot, check status at /status'}
