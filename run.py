@@ -7,4 +7,4 @@ app = FastAPI(title='CommaTg API')
 
 app.include_router(bot_router)
 
-uvicorn.run(app, host="localhost", port=9000)
+uvicorn.run(app, host="0.0.0.0", port=9000)
