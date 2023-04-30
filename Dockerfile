@@ -1,11 +1,17 @@
 FROM python
 
-COPY . .
+RUN mkdir /app
+WORKDIR /app
 
-WORKDIR .
+COPY ./requirements.txt /app/requirements.txt
 
-RUN python -m pip install -r requirements.txt
+RUN apt-get update \
+    && apt-get install gcc -y \
+    && apt-get clean \
+
+RUN pip install -r /app/requirements.txt \
+    && rm -rf /root/.cache/pip
+
+COPY . /app
 
 EXPOSE 9000
-
-CMD ["python", "run.py"]
