@@ -4,6 +4,7 @@ from fastapi import APIRouter
 
 from src.apps.bot.schemas import BotAddSchema
 from src.apps.kafka.consumer import init_consumer
+from src.apps.kafka.producer import init_producer
 from src.apps.kafka.producer import producer_send_one
 
 router = APIRouter(prefix='/bot',

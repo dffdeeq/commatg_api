@@ -12,7 +12,12 @@ async def init_producer() -> AIOKafkaProducer:
 
 
 async def producer_send_one(topic: str, value: any) -> None:
+    print('producer_send_one func')
     producer = await init_producer()
+    print(producer, type(producer))
     await producer.start()
+    print('producer start...')
     await producer.send_and_wait(topic=topic, value=value.encode('utf-8'))
+    print('producer sent')
     await producer.stop()
+    print('producer stop')
