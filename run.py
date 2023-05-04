@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from src.apps.bot.routers import router as bot_router
+from src.bot.router import router as bot_router
 
 app = FastAPI(title='CommaTg API')
 
