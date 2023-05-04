@@ -1,6 +1,6 @@
 from aiokafka import AIOKafkaProducer
 
-from src.config import settings
+from .config import settings
 
 
 async def init_producer() -> AIOKafkaProducer:
@@ -11,7 +11,10 @@ async def init_producer() -> AIOKafkaProducer:
     return producer
 
 
-async def producer_send_one(topic: str, value: any) -> None:
+async def producer_send_one(
+        topic: str,
+        value: any
+):
     print('producer_send_one func')
     producer = await init_producer()
     print(producer, type(producer))
